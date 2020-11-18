@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block body %}
+  <article class="media content-section">
+    <div class="media-body">
+      <div class="article-metadata">
+        <small class="text-muted">{{ movie.releas_year.strftime('%Y-%m-%d') }}</small>
+      </div>
+      <h2 class="article-title">{{ movie.title }}</h2>
+      <p class="article-content">{{ movie.description }}</p>
+      <a href="{{ url_for('movies.movie_edit', id=movie.id) }}"><button class="btn btn-outline-primary">Edit</button></a>
+      <a href="{{ url_for('movies.movie_delete', id=movie.id) }}"><button class="btn btn-danger">Delete</button></a>
+    </div>
+  </article>
+  <!-- Modal -->
+
+{% endblock body %}

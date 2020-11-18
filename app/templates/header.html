@@ -1,0 +1,23 @@
+<header class="app-header">
+    <nav class="navbar navbar-expand-md navbar-dark bg-teal fixed-top">
+        <a class="navbar-brand mr-4" href="/">ITI App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarToggle">
+          <div class="navbar-nav mr-auto">
+            <a class="nav-item nav-link" href="{{ url_for('movies.index') }}">Home</a>
+            <a class="nav-item nav-link" href="{{ url_for('movies.movies_form') }}">Add Movie</a>
+          </div>
+          <!-- Navbar Right Side -->
+          <div class="navbar-nav">
+                {% if current_user.is_authenticated %}
+                <a class="nav-item nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
+              {% else %}
+                <a class="nav-item nav-link" href="{{ url_for('auth.login') }}">Login</a>
+                <a class="nav-item nav-link" href="{{ url_for('auth.register') }}">Register</a>
+              {% endif %} 
+          </div>
+        </div>
+    </nav>
+  </header>

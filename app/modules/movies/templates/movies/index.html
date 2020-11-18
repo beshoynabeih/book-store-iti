@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+    {% for movie in movies %}
+        <div class='movie-container'>
+            <article class="media content-section">
+                {#  <img class="rounded-circle movie-img" src="{{ url_for('static', filename='movie_covers/' + movie.cover) }}"> #}
+                 <div class="media-body">
+                   <h2><a class="movie-title" href="{{ url_for('movies.movie', id=movie.id) }}">{{ movie.title }}</a></h2>
+                   <p class="movie-content">{{ movie.description }}</p>
+                   <div class="movie-metadata d-flex justify-content-between">
+                       <small class="text-muted">Release Year: {{ movie.year}}</small>
+                       <span class='ml-2'>
+                           {% for genre in movie.genres %}
+                           <span class='badge badge-warning'>{{ genre.name }}</span>
+                            {% endfor %}
+                       </span>
+                     </div>
+                 </div>
+               </article>
+        </div>
+    {% endfor %}
+
+{% endblock %}

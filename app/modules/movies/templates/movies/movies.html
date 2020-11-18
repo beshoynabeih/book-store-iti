@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="content-section">
+    <form method="POST" action="/movies">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Add Movie</legend>
+            <div class="form-group">
+                {{ form.title.label(class="form-control-label") }}
+
+                {% if form.title.errors %}
+                    {{ form.title(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.title.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {% if movie %}
+                        {{ form.title(class="form-control form-control-lg", value=movie.title) }}
+                    {% else %}
+                        {{ form.title(class="form-control form-control-lg") }}
+                    {% endif %}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.description.label(class="form-control-label") }}
+                {% if form.description.errors %}
+                    {{ form.description(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.description.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {% if movie %}
+                        <textarea class="form-control form-control-lg" name="description">{{ movie.description }}</textarea>
+                    {% else %}
+                        {{ form.description(class="form-control form-control-lg") }}
+                    {% endif %}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.year.label(class="form-control-label") }}
+                {% if form.year.errors %}
+                    {{ form.year(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.year.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {% if movie %}
+                        {{ form.year(class="form-control form-control-lg", value=movie.year) }}
+                    {% else %}
+                        {{ form.year(class="form-control form-control-lg") }}
+                    {% endif %}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.genres.label(class="form-control-label") }}
+                {% if form.genres.errors %}
+                    {{ form.genres(class="form-control form-control-lg is-invalid", multiple=True, size=4) }}
+                    <div class="invalid-feedback">
+                        {% for error in form.genres.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {% if movie %}
+                        <select class="form-control form-control-lg" multiple size="4" name="genres">
+                            {% for genre in form.genres.choices %}
+                                {% if movie and genre[0] in selected_genres %}
+                                    <option value="{{ genre[0] }}" selected>{{ genre[1] }}</option>
+                                {% else %}
+                                    <option value="{{ genre[0] }}">{{ genre[1] }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    {% else %}
+                        {{ form.genres(class="form-control form-control-lg", size=4)}}
+                    {% endif %}
+                {% endif %}
+            </div>
+        </fieldset>
+        <div class="form-group">
+            {% if movie %}
+                {{ form.submit(class="btn btn-outline-info", value="Update") }}
+            {% else %}
+                {{ form.submit(class="btn btn-outline-info") }}
+            {% endif %}
+        </div>
+    </form>
+</div>
+
+{% endblock body %}
