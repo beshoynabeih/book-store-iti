@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="content-section">
+    <form method="POST" action="" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Add Artist</legend>
+            <div class="form-group">
+                {{ form.first_name.label(class="form-control-label") }}
+
+                {% if form.first_name.errors %}
+                    {{ form.first_name(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.first_name.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {% if artist %}
+                        {{ form.first_name(class="form-control form-control-lg", value=artist.first_name) }}
+                    {% else %}
+                        {{ form.first_name(class="form-control form-control-lg") }}
+                    {% endif %}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.last_name.label(class="form-control-label") }}
+                {% if form.last_name.errors %}
+                    {{ form.last_name(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.last_name.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {% if artist %}
+                       {{ form.last_name(class="form-control form-control-lg", value=artist.last_name) }}
+                    {% else %}
+                        {{ form.last_name(class="form-control form-control-lg") }}
+                    {% endif %}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.birth_date.label(class="form-control-label") }}
+                {% if form.birth_date.errors %}
+                    {{ form.birth_date(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.birth_date.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {% if artist %}
+                        {{ form.birth_date(class="form-control form-control-lg", value=artist.birth_date) }}
+                    {% else %}
+                        {{ form.birth_date(class="form-control form-control-lg") }}
+                    {% endif %}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.nationality.label(class="form-control-label") }}
+                {% if form.nationality.errors %}
+                    {{ form.nationality(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.nationality.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {% if artist %}
+                        {{ form.nationality(class="form-control form-control-lg", value=artist.nationality) }}
+                    {% else %}
+                        {{ form.nationality(class="form-control form-control-lg") }}
+                    {% endif %}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.avatar.label(class="form-control-label") }}
+                {% if form.avatar.errors %}
+                    {{ form.avatar(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.avatar.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {% if artist %}
+                        {{ form.avatar(class="form-control form-control-lg", value=artist.avatar) }}
+                    {% else %}
+                        {{ form.avatar(class="form-control form-control-lg") }}
+                    {% endif %}
+                {% endif %}
+            </div>
+        </fieldset>
+        <div class="form-group">
+            {% if artist %}
+                {{ form.submit(class="btn btn-outline-info", value="Update") }}
+            {% else %}
+                {{ form.submit(class="btn btn-outline-info") }}
+            {% endif %}
+        </div>
+    </form>
+</div>
+
+{% endblock body %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block body %}
+{% for artist in artists %}
+  <article class="media content-section">
+    <div class="media-body">
+      <h2 class="article-title"> <a href="{{ url_for('artists.artist', id=artist.id) }}">{{ artist.first_name }} {{ artist.last_name }}</a></h2>
+      <small>{{ artist.birth_date }},  {{artist.nationality}}</small>
+      {#<a href="{{ url_for('movies.movie_edit') }}"><button class="btn btn-outline-primary">Edit</button></a>
+      <a href="{{ url_for('movies.movie_delete') }}"><button class="btn btn-danger">Delete</button></a>#}
+    </div>
+  </article>
+  <!-- Modal -->
+{% endfor %}
+{% endblock body %}

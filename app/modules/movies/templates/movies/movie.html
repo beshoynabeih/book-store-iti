@@ -7,8 +7,10 @@
       </div>
       <h2 class="article-title">{{ movie.title }}</h2>
       <p class="article-content">{{ movie.description }}</p>
+      {% if current_user.is_authenticated %}
       <a href="{{ url_for('movies.movie_edit', id=movie.id) }}"><button class="btn btn-outline-primary">Edit</button></a>
       <a href="{{ url_for('movies.movie_delete', id=movie.id) }}"><button class="btn btn-danger">Delete</button></a>
+      {% endif %}
     </div>
   </article>
   <!-- Modal -->

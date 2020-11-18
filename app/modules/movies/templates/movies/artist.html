@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block body %}
+  <article class="media content-section">
+    <div class="media-body">
+      <div class="article-metadata">
+        <small class="text-muted">{{ artist.birth_date.strftime('%Y-%m-%d') }}</small>
+      </div>
+      {% if artist.avatar %}
+      <img height="100" width="100" class="rounded-circle" src="{{ url_for('static', filename='images/avatars/'+artist.avatar) }}" alt="">
+      {% endif %}
+      <h2 class="article-title">{{ artist.first_name }} {{ artist.last_name }}</h2>
+      <p class="article-content">{{ artist.nationality }}</p>
+      <p>Movies</p>
+      {% if  artist.movies %}
+        <ul>
+          {% for movie in artist.movies  %}
+          <li>{{movie.title}}</li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>No Movies</p>
+      {% endif %}
+      {% if current_user.is_authenticated %}
+      <a href="{{ url_for('artists.artist_edit', id=artist.id) }}"><button class="btn btn-outline-primary">Edit</button></a>
+      <a href="{{ url_for('artists.artist_delete', id=artist.id) }}"><button class="btn btn-danger">Delete</button></a>
+      {% endif %}
+    </div>
+  </article>
+  <!-- Modal -->
+
+{% endblock body %}

@@ -27,10 +27,11 @@ def create_app(config):
     bcrypt.init_app(app)
     login_manager.init_app(app)
     migrate.init_app(app, db)
-    from app.modules.movies.views import movie_blueprint
+    from app.modules.movies.views import movie_blueprint, artist_blueprint
     from app.modules.auth.views import auth_blueprint
 
     app.register_blueprint(auth_blueprint)
     app.register_blueprint(movie_blueprint)
+    app.register_blueprint(artist_blueprint)
 
     return app
